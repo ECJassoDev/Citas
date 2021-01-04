@@ -14,6 +14,9 @@ const App = () => {
     { id: '3', paciente: 'Native', propietario: 'Josue', sintomas: 'No hace nada' },
   ]);
 
+  const deletePatient = (id) => setCitas((currentDates) => {
+    return currentDates.filter((date) =>  date.id !== id)
+  })
   return (
     <>
       <View style={styles.container}>
@@ -21,7 +24,7 @@ const App = () => {
         <Text style={styles.title}>{citas.length > 0 ? 'Administra tus citas': 'Agregar una cita'}</Text>
         <FlatList
           data={citas}
-          renderItem={({ item }) => <Date date={item} />}
+          renderItem={({ item }) => <Date date={item} deletePatient={deletePatient} />}
           keyExtractor={item => item.id}
         />
       </View>
@@ -36,6 +39,7 @@ const styles = StyleSheet.create({
   },
   title: {
     marginTop: 40,
+    marginBottom: 20,
     fontSize: 24,
     textAlign: 'center',
     fontWeight: 'bold',
