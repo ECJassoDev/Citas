@@ -9,8 +9,7 @@ import {
 } from 'react-native';
 
 const Date = ({date, deletePatient}) => {
-  const deleteDialog = (id) => {
-      console.log(`Eliminando ${id}`);      
+  const deleteDialog = (id) => {      
       deletePatient(id);
   };
 
