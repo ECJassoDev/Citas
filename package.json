@@ -11,8 +11,10 @@
     "precommit": "lint-staged"
   },
   "dependencies": {
+    "@react-native-community/datetimepicker": "^3.0.9",
     "react": "16.13.1",
     "react-native": "0.63.4",
+    "react-native-modal-datetime-picker": "^9.1.0",
     "rxjs-compat": "^6.6.3"
   },
   "devDependencies": {
