@@ -9,23 +9,23 @@ import {
 } from 'react-native';
 
 const Date = ({date, deletePatient}) => {
-  const deleteDialog = (id) => {      
-      deletePatient(id);
+  const deleteDialog = (id) => {
+    deletePatient(id);
   };
 
   return (
     <View style={styles.date}>
       <View>
         <Text style={styles.label}>Paciente: </Text>
-        <Text style={styles.text}>{date.paciente}</Text>
+        <Text style={styles.text}>{date.patient}</Text>
       </View>
       <View>
         <Text style={styles.label}>Propietario: </Text>
-        <Text style={styles.text}>{date.propietario}</Text>
+        <Text style={styles.text}>{date.owner}</Text>
       </View>
       <View>
         <Text style={styles.label}>Sintomas: </Text>
-        <Text style={styles.text}>{date.sintomas}</Text>
+        <Text style={styles.text}>{date.symptoms}</Text>
       </View>
       <View>
         <TouchableHighlight

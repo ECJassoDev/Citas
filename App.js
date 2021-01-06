@@ -5,18 +5,23 @@ import Form from './components/Form';
 
 const App = () => {
   const [citas, setCitas] = useState([
-    {id: '1', paciente: 'Hoook', propietario: 'Emanuel', sintomas: 'No come'},
+    {
+      id: '1',
+      patient: 'Hoook',
+      owner: 'Emanuel',
+      symptoms: 'No come',
+    },
     {
       id: '2',
-      paciente: 'Redux',
-      propietario: 'Michelle',
-      sintomas: 'No duerme',
+      patient: 'Redux',
+      owner: 'Michelle',
+      symptoms: 'No duerme',
     },
     {
       id: '3',
-      paciente: 'Native',
-      propietario: 'Josue',
-      sintomas: 'No hace nada',
+      patient: 'Native',
+      owner: 'Josue',
+      symptoms: 'No hace nada',
     },
   ]);
 
@@ -24,11 +29,16 @@ const App = () => {
     setCitas((currentDates) => {
       return currentDates.filter((date) => date.id !== id);
     });
+
+  const onSubmit = (date) => {
+    setCitas([...citas, date]);
+  };
+
   return (
     <>
       <View style={styles.container}>
         <Text style={styles.title}>Proyecto Citas</Text>
-        <Form />
+        <Form onSubmit={onSubmit} />
         <Text style={styles.title}>
           {citas.length > 0 ? 'Administra tus citas' : 'Agregar una cita'}
         </Text>
