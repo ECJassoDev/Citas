@@ -9,9 +9,10 @@ import {
   ScrollView,
   Alert,
 } from 'react-native';
+import shortid from 'shortid';
 import DateTimePickerModal from 'react-native-modal-datetime-picker';
 
-const Form = ({onSubmit}) => {
+const Form = ({onSubmit, handleShow}) => {
   const [isDatePickerVisible, setDatePickerVisibility] = useState(false);
   const [isTimePickerVisible, setTimePickerVisibility] = useState(false);
   const [date, setDate] = useState('');
@@ -60,14 +61,25 @@ const Form = ({onSubmit}) => {
       patient.trim() === '' ||
       owner.trim() === '' ||
       phone.trim() === '' ||
-      symptom.trim() === '' ||
+      symptoms.trim() === '' ||
       !date ||
       !time
     ) {
       showAlert();
       return;
     } else {
-      onSubmit({patient, owner, symptoms, phone, date, time});
+      const date = {
+        id: shortid.generate(),
+        patient,
+        owner,
+        symptoms,
+        phone,
+        date,
+        time,
+      };
+      onSubmit(date);
+      Alert.alert('Bien', 'Cita creada', [{text: 'Cerrar'}]);
+      handleShow();
     }
   };
 
@@ -138,12 +150,17 @@ const Form = ({onSubmit}) => {
           multiline
         />
       </View>
-      <View style={styles.formContainer}>
+      <View style={styles.actionContainer}>
         <TouchableHighlight
           style={styles.submitButton}
           onPress={() => handleSubmit()}>
           <Text style={styles.submitText}>Guardar</Text>
         </TouchableHighlight>
+        {/* <TouchableHighlight
+          style={styles.cancelButton}
+          onPress={() => handleShow()}>
+          <Text style={styles.submitText}>Cancelar</Text>
+        </TouchableHighlight> */}
       </View>
     </ScrollView>
   );
@@ -153,13 +170,13 @@ export default Form;
 
 const styles = StyleSheet.create({
   scrollContainer: {
-    height: '150%',
+    height: '100%',
+    marginBottom: 10,
   },
   formContainer: {
     backgroundColor: '#FFF',
     paddingHorizontal: 20,
     paddingVertical: 5,
-    marginHorizontal: '2.5%',
   },
   label: {
     fontWeight: 'bold',
@@ -175,12 +192,27 @@ const styles = StyleSheet.create({
   },
   submitButton: {
     padding: 10,
-    backgroundColor: '#AA076B',
+    backgroundColor: '#7d024e',
     marginVertical: 10,
+    width: '100%',
   },
   submitText: {
     color: 'white',
     fontWeight: 'bold',
     textAlign: 'center',
+  },
+  cancelButton: {
+    padding: 10,
+    backgroundColor: 'black',
+    marginVertical: 10,
+    width: '40%',
+  },
+  actionContainer: {
+    display: 'flex',
+    flexDirection: 'row',
+    justifyContent: 'space-around',
+    backgroundColor: '#FFF',
+    paddingHorizontal: 20,
+    paddingVertical: 5,    
   },
 });
